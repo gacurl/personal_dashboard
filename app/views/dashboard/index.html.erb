@@ -3,11 +3,11 @@
 <% @categories.each do |category| %>
   <div style="margin-bottom: 20px;">
     <h2><%= category.name %></h2>
-
+    <p>Links count: <%= category.links.count %></p>
     <ul>
       <% category.links.each do |link| %>
         <li>
-          <a href="<%= link.url %>" target="_blank">
+          <a href="<%= link.url %>" target="_blank" rel="noopener">
             <%= link.name %>
           </a>
         </li>
