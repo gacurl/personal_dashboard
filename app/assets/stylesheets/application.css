@@ -184,3 +184,55 @@ a {
   color: var(--muted);
   font-style: italic;
 }
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+  padding: 0.9rem 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(8, 19, 29, 0.95), rgba(5, 13, 20, 0.98));
+  box-shadow: 0 14px 28px var(--shadow);
+}
+
+.top-bar__brand {
+  font-family: "Cinzel", Georgia, serif;
+  letter-spacing: 0.12em;
+  color: var(--text);
+  font-size: 1.1rem;
+}
+
+.top-bar__actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.btn {
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--line);
+  transition: all 0.15s ease;
+}
+
+.btn--primary {
+  background: linear-gradient(180deg, var(--gold-soft), var(--gold));
+  color: #1a1408;
+  border: none;
+}
+
+.btn--primary:hover {
+  filter: brightness(1.05);
+}
+
+.btn--secondary {
+  background: transparent;
+  color: var(--text);
+}
+
+.btn--secondary:hover {
+  border-color: var(--gold-soft);
+}
