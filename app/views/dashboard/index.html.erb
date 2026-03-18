@@ -1,17 +1,16 @@
 <!-- app/views/dashboard/index.html.erb -->
 <div class="dashboard-shell">
   <div class="top-bar">
-    <div class="top-bar__brand">LINKDASH</div>
+    <%= link_to "Search Flight Plan", root_path, class: "top-bar__brand" %>
 
     <div class="top-bar__actions">
-      <%= link_to "+ Link", new_link_path, class: "btn btn--primary" %>
       <%= link_to "+ Category", new_category_path, class: "btn btn--secondary" %>
     </div>
   </div>
   
   <header class="dashboard-header">
-    <h1 class="dashboard-title">The Lobby</h1>
-    <p class="dashboard-subtitle">Your daily links, organized and close at hand.</p>
+    <h1 class="dashboard-title">Flight Deck Control</h1>
+    <p class="dashboard-subtitle">Your daily links, prepped, set, and ready for launch</p>
   </header>
 
   <main class="category-grid">
@@ -19,22 +18,31 @@
       <section class="category-card">
         <div class="category-card__header">
           <h2 class="category-card__title"><%= category.name %></h2>
-          <span class="category-card__count"><%= pluralize(category.links.count, "link") %></span>
+          <%= link_to "+ Add", new_link_path(category_id: category.id), class: "card-add-btn" %>
         </div>
 
         <% if category.links.any? %>
           <ul class="link-list">
             <% category.links.each do |link| %>
               <li class="link-list__item">
-                <a class="dashboard-link" href="<%= link.url %>" target="_blank" rel="noopener">
-                  <span class="dashboard-link__name"><%= link.name %></span>
-                  <span class="dashboard-link__url"><%= link.url %></span>
-                </a>
+                <%= link_to link.url, target: "_blank", rel: "noopener", class: "link-card" do %>
+                  <h3><%= link.name %></h3>
+                  <p><%= link.url %></p>
+                <% end %>
+                <div class="link-card__actions">
+                  <%= link_to "Edit", edit_link_path(link), class: "link-manage-link" %>
+                  <%= link_to "Delete", link_path(link),
+                    data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                    class: "link-manage-link link-manage-link--danger" %>
+                </div>
               </li>
             <% end %>
           </ul>
         <% else %>
-          <p class="empty-state">No links yet.</p>
+          <div class="empty-state">
+            <p>No links yet.</p>
+            <%= link_to "Add first link", new_link_path(category_id: category.id), class: "empty-cta" %>
+          </div>
         <% end %>
       </section>
     <% end %>

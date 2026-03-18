@@ -22,8 +22,12 @@
   </div>
 
   <div>
-    <%= form.label :category_id, "Category", style: "display: block" %>
-    <%= form.collection_select :category_id, Category.all, :id, :name, prompt: "Select a category" %>
+    <% if params[:category_id] %>
+      <p class="locked-category">Category: <strong><%= Category.find(params[:category_id]).name %></strong></p>
+      <%=form.hidden_field :category_id, value: params[:category_id] %>
+    <% else %>
+      <%= form.collection_select :category_id, Category.all, :id, :name, prompt: "Select a category"  %>
+    <% end %>
   </div>
 
   <div>

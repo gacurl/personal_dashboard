@@ -21,6 +21,10 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render "shared/top_bar" %>
+
+    <main class="page-container">
+      <%= yield %>
+    </main>
   </body>
 </html>
