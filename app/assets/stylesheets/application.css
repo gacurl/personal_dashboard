@@ -51,7 +51,7 @@ body {
     ),
     linear-gradient(180deg, var(--bg-soft) 0%, var(--bg) 100%);
   color: var(--text);
-  font-family: "Special Elite", Georgia, serif;
+  font-family: "Libre Baskerville", system-ui, -apple-system, sans-serif;
 }
 
 a {
