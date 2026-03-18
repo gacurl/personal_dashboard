@@ -1,21 +1,31 @@
 <!-- app/views/dashboard/index.html.erb -->
 <div class="dashboard-shell">
-  <div class="top-bar">
-    <%= link_to "Search Flight Plan", root_path, class: "top-bar__brand" %>
+  <div class="flight-plan-bar">
+    <form class="flight-plan-bar__form" action="#" method="get">
+      <label for="flight-plan-search" class="sr-only">Search Flight Plan</label>
+      <input
+        id="flight-plan-search"
+        name="q"
+        type="search"
+        class="flight-plan-bar__input"
+        placeholder="Search Flight Plan"
+        autocomplete="off"
+      />
+    </form>
 
-    <div class="top-bar__actions">
+    <div class="flight-plan-bar__actions">
       <%= link_to "+ Category", new_category_path, class: "btn btn--secondary" %>
     </div>
   </div>
-  
+
   <header class="dashboard-header">
     <h1 class="dashboard-title">Flight Deck Control</h1>
     <p class="dashboard-subtitle">Your daily links, prepped, set, and ready for launch</p>
   </header>
 
-  <main class="category-grid">
+  <section class="category-grid">
     <% @categories.each do |category| %>
-      <section class="category-card">
+      <section class="category-card" data-searchable-category>
         <div class="category-card__header">
           <h2 class="category-card__title"><%= category.name %></h2>
           <%= link_to "+ Add", new_link_path(category_id: category.id), class: "card-add-btn" %>
@@ -24,7 +34,12 @@
         <% if category.links.any? %>
           <ul class="link-list">
             <% category.links.each do |link| %>
-              <li class="link-list__item">
+              <li 
+                class="link-list__item"
+                data-searchable-item
+                data-name="<%= link.name.to_s.downcase %>" 
+                data-url="<%= link.url.to_s.downcase %>"
+              >
                 <%= link_to link.url, target: "_blank", rel: "noopener", class: "link-card" do %>
                   <h3><%= link.name %></h3>
                   <p><%= link.url %></p>
@@ -40,11 +55,11 @@
           </ul>
         <% else %>
           <div class="empty-state">
-            <p>No links yet.</p>
+            No links yet.
             <%= link_to "Add first link", new_link_path(category_id: category.id), class: "empty-cta" %>
           </div>
         <% end %>
       </section>
     <% end %>
-  </main>
+  </section>
 </div>
