@@ -1,17 +1,33 @@
-<h1>Dashboard</h1>
+<!-- app/views/dashboard/index.html.erb -->
+<div class="dashboard-shell">
+  <header class="dashboard-header">
+    <h1 class="dashboard-title">The Lobby</h1>
+    <p class="dashboard-subtitle">Your daily links, organized and close at hand.</p>
+  </header>
 
-<% @categories.each do |category| %>
-  <div style="margin-bottom: 20px;">
-    <h2><%= category.name %></h2>
-    <p>Links count: <%= category.links.count %></p>
-    <ul>
-      <% category.links.each do |link| %>
-        <li>
-          <a href="<%= link.url %>" target="_blank" rel="noopener">
-            <%= link.name %>
-          </a>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+  <main class="category-grid">
+    <% @categories.each do |category| %>
+      <section class="category-card">
+        <div class="category-card__header">
+          <h2 class="category-card__title"><%= category.name %></h2>
+          <span class="category-card__count"><%= pluralize(category.links.count, "link") %></span>
+        </div>
+
+        <% if category.links.any? %>
+          <ul class="link-list">
+            <% category.links.each do |link| %>
+              <li class="link-list__item">
+                <a class="dashboard-link" href="<%= link.url %>" target="_blank" rel="noopener">
+                  <span class="dashboard-link__name"><%= link.name %></span>
+                  <span class="dashboard-link__url"><%= link.url %></span>
+                </a>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p class="empty-state">No links yet.</p>
+        <% end %>
+      </section>
+    <% end %>
+  </main>
+</div>
