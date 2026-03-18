@@ -25,7 +25,7 @@
 
   <section class="category-grid">
     <% @categories.each do |category| %>
-      <section class="category-card">
+      <section class="category-card" data-searchable-category>
         <div class="category-card__header">
           <h2 class="category-card__title"><%= category.name %></h2>
           <%= link_to "+ Add", new_link_path(category_id: category.id), class: "card-add-btn" %>
