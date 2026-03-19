@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :schedule_items
   root "dashboard#index"
   # get "dashboard/index"
   resources :links

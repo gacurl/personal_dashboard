@@ -1,0 +1,11 @@
+<% content_for :title, "New schedule item" %>
+
+<h1>New schedule item</h1>
+
+<%= render "form", schedule_item: @schedule_item %>
+
+<br>
+
+<div>
+  <%= link_to "Back to schedule items", schedule_items_path %>
+</div>
