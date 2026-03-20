@@ -1,16 +1,35 @@
-<p style="color: green"><%= notice %></p>
+<!-- app/views/categories/index.html.erb -->
+<div class="dashboard-shell">
+  <header class="dashboard-header">
+    <h1 class="dashboard-title">Categories</h1>
+    <p class="dashboard-subtitle">Organize your launch points by mission area</p>
+  </header>
 
-<% content_for :title, "Categories" %>
+  <section class="category-grid">
+    <% @categories.each do |category| %>
+      <section class="category-card">
+        <div class="category-card__header">
+          <h2 class="category-card__title"><%= category.name %></h2>
+          <%= link_to "Edit", edit_category_path(category), class: "card-add-btn" %>
+        </div>
 
-<h1>Categories</h1>
-
-<div id="categories">
-  <% @categories.each do |category| %>
-    <%= render category %>
-    <p>
-      <%= link_to "Show this category", category %>
-    </p>
-  <% end %>
+        <% if category.links.any? %>
+          <ul class="link-list">
+            <% category.links.each do |link| %>
+              <li class="link-list__item">
+                <%= link_to link.url, target: "_blank", rel: "noopener", class: "link-card" do %>
+                  <h3><%= link.name %></h3>
+                  <p><%= link.url %></p>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <div class="empty-state">
+            No links in this category yet.
+          </div>
+        <% end %>
+      </section>
+    <% end %>
+  </section>
 </div>
-
-<%= link_to "New category", new_category_path %>
