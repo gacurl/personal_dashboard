@@ -3,7 +3,7 @@ class LinksController < ApplicationController
 
   # GET /links or /links.json
   def index
-    @links = Link.all
+    @links_by_category = Link.includes(:category).all.group_by(&:category)
   end
 
   # GET /links/1 or /links/1.json

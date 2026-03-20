@@ -241,9 +241,14 @@ a {
   font-size: 1.25rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
   color: var(--text);
 }
 
+.top-bar__brand:hover {
+  opacity: 0.8;
+}
 .top-bar__actions {
   display: flex;
   gap: 0.6rem;
@@ -407,12 +412,6 @@ a {
   box-shadow: 0 18px 34px var(--shadow);
 }
 
-.schedule-panel__header {
-  margin-bottom: 1rem;
-  padding-bottom: 0.8rem;
-  border-bottom: 1px solid rgba(176, 138, 74, 0.25);
-}
-
 .schedule-panel__title {
   margin: 0;
   color: var(--text);
@@ -481,6 +480,8 @@ a {
   display: flex;
   gap: 0.6rem;
   align-items: center;
+  justify-content: flex-end;
+  white-space: nowrap;
 }
 
 .schedule-panel__empty {
@@ -523,4 +524,87 @@ a {
   margin-bottom: 1rem;
   padding-bottom: 0.8rem;
   border-bottom: 1px solid rgba(176, 138, 74, 0.25);
+}
+
+.next-event {
+  margin: 0 0 2rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(8, 19, 29, 0.96), rgba(5, 13, 20, 0.98));
+  box-shadow: 0 18px 34px var(--shadow);
+}
+
+.next-event__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(176, 138, 74, 0.25);
+}
+
+.next-event__body {
+  display: flex;
+  margin-top: 0.75rem;
+  gap: 1rem;
+  align-items: center;
+}
+
+.next-event__time {
+  color: var(--gold-soft);
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 2.75rem;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+}
+
+.next-event__details {
+  min-width: 0;
+}
+
+.next-event__details strong {
+  display: block;
+  color: var(--text);
+  font-size: 1.05rem;
+  margin-bottom: 0.25rem;
+}
+
+.next-event__details span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.next-event__empty {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.next-event__label {
+  margin-bottom: 0.2rem;
+  color: var(--gold-soft);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.next-event__body.is-imminent .next-event__time {
+  color: #ff6b6b;
+}
+
+.next-event__body.is-soon .next-event__time {
+  color: #f4c430;
+}
+
+.next-event__body.is-normal .next-event__time {
+  color: var(--gold-soft);
+}
+
+.next-event__body.is-live .next-event__time {
+  color: #ff6b6b;
+}
+
+.next-event__body.is-live .next-event__label {
+  color: #ff6b6b;
 }

@@ -1,16 +1,44 @@
-<p style="color: green"><%= notice %></p>
-
-<% content_for :title, "Links" %>
-
 <h1>Links</h1>
+<div class="dashboard-shell">
+  <header class="dashboard-header">
+    <h1 class="dashboard-title">Links</h1>
+    <p class="dashboard-subtitle">Manage and launch your saved resources</p>
+  </header>
 
-<div id="links">
-  <% @links.each do |link| %>
-    <%= render link %>
-    <p>
-      <%= link_to "Show this link", link %>
-    </p>
+<section class="category-grid">
+  <% @links_by_category.each do |category, links| %>
+    <section class="category-card">
+      <div class="category-card__header">
+        <h2 class="category-card__title"><%= category&.name || "Uncategorized" %></h2>
+        <%= link_to "+ Add", new_link_path(category_id: category&.id), class: "card-add-btn" %>
+      </div>
+
+      <% if links.any? %>
+        <ul class="link-list">
+          <% links.each do |link| %>
+            <li class="link-list__item">
+              <%= link_to link.url, target: "_blank", rel: "noopener", class: "link-card" do %>
+                <h3><%= link.name %></h3>
+                <p><%= link.url %></p>
+              <% end %>
+
+              <div class="link-card__actions">
+                <%= link_to "Edit", edit_link_path(link), class: "link-manage-link" %>
+                <%= link_to "Delete", link_path(link),
+                      data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                      class: "link-manage-link link-manage-link--danger" %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <div class="empty-state">
+          No links yet.
+        </div>
+      <% end %>
+    </section>
   <% end %>
-</div>
+</section>
 
-<%= link_to "New link", new_link_path %>
+<%= link_to "New link", new_link_path, class: "btn btn--secondary" %>
+</div>

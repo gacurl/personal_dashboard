@@ -18,6 +18,33 @@
     </div>
   </div>
 
+  <section class="next-event">
+    <div class="next-event__header">
+      <div>
+        <h2 class="schedule-panel__title">Next Sortie</h2>
+        <p class="schedule-panel__subtitle">Your next scheduled event</p>
+      </div>
+
+      <%= link_to "Schedule", schedule_items_path, class: "btn btn--secondary" %>
+    </div>
+
+    <% if @next_event %>
+      <div class="next-event__body <%= next_event_urgency_class(@next_event) %>">
+        <div class="next-event__time">
+          <%= next_event_primary_text(@next_event) %>
+        </div>
+
+        <div class="next-event__details">
+          <div class="next-event__label">Event</div>
+          <strong><%= @next_event.title %></strong>
+          <span><%= next_event_status_text(@next_event) %></span>
+        </div>
+      </div>
+    <% else %>
+      <p class="next_event__empty">No upcoming events</p>
+    <% end %>
+  </section>
+
   <header class="dashboard-header">
     <h1 class="dashboard-title">Flight Deck Control</h1>
     <p class="dashboard-subtitle">Your daily links, prepped, set, and ready for launch</p>
@@ -69,7 +96,7 @@
         <h2 class="schedule-panel__title">Today’s Flight Schedule</h2>
         <p class="schedule-panel__subtitle">Upcoming events and key timing for today</p>
       </div>
-      
+
       <%= link_to "+ Schedule", new_schedule_item_path, class: "btn btn--secondary" %>
     </div>
 
@@ -104,7 +131,7 @@
         </div>
       <% end %>
 
-      <div class="schedule-panel__section">
+      <section class="schedule-panel__section">
         <h3 class="schedule-panel__section-title">Upcoming</h3>
 
         <% if @upcoming_schedule_items.any? %>
@@ -134,7 +161,7 @@
             No upcoming schedule items.
           </div>
         <% end %>
+      </section>
     </div>
-  </div>
   </section>
 </div>

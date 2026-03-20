@@ -14,5 +14,15 @@ class DashboardController < ApplicationController
       .where("start_time > ?", now.end_of_day)
       .order(:start_time)
       .limit(5)
+
+    @next_event = ScheduleItem
+      .where("start_time >= ?", now)
+      .order(:start_time)
+      .first
+
+    @next_event ||= ScheduleItem
+      .where(start_time: today_range)
+      .order(start_time: :desc)
+      .first
   end
 end
